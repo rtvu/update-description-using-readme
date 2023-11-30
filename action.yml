@@ -1,0 +1,50 @@
+name: "Update Description Using README"
+description: "GitHub Action to update repository's description using README."
+author: "rtvu"
+
+branding:
+  icon: "book-open"
+  color: "gray-dark"
+
+inputs:
+  repository:
+    description: "Repository"
+    required: true
+  readme:
+    description: "Path to README"
+    required: false
+    default: "README.md"
+  update:
+    description: "Update repository"
+    required: false
+    default: true
+  token:
+    description: "GitHub token"
+    required: true
+
+outputs:
+  description:
+    description: "README's description"
+    value: ${{ steps.get-description.outputs.description }}
+
+runs:
+  using: "composite"
+  steps:
+    -
+      name: Get description
+      id: get-description
+      shell: bash
+      run: python3 ./get-description.py ${{ inputs.readme }}
+    -
+      name: Update repository
+      if: ${{ inputs.update }} == "true"
+      shell: bash
+      run: |
+        gh api \
+          --method PATCH \
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          /repos/${{ inputs.repository }} \
+          -f description="${{ steps.get-description.outputs.description }}"
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}

@@ -19,4 +19,4 @@ jobs:
         uses: ./
         with:
           repository: ${{ github.repository }}
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.REPOSITORY_PAT }}

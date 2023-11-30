@@ -1,0 +1,20 @@
+name: "Update Repository Description"
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  update-repository-description:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout repository
+        uses: actions/checkout@v4
+      -
+        name: Update repository
+        uses: ./
+        with:
+          repository: ${{ github.repository }}
+          token: ${{ secrets.GH_PAT }}

@@ -10,7 +10,7 @@ Description must be the only content in the first header.
 
 ``` yml
 name: Update repository descriptoin
-uses: rtvu/update-description-using-readme@v1.0.0
+uses: rtvu/update-description-using-readme@v1.0.2
 with:
   repository: ${{ github.repository }}
   token: ${{ secrets.REPOSITORY_PAT }}

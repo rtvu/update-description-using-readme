@@ -3,7 +3,7 @@ name: "Update Repository Description"
 on:
   push:
     branches:
-      - "main"
+      - "development"
     paths:
       - "README.md"
 

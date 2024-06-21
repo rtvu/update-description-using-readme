@@ -8,8 +8,8 @@ Description must be the only content in the first header.
 
 ## Usage
 
-``` yml
-name: Update repository descriptoin
+``` yaml
+name: Update repository description
 uses: rtvu/update-description-using-readme@v1.0.2
 with:
   repository: ${{ github.repository }}
